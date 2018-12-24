@@ -5,10 +5,10 @@ api_key = "DeSvEj7MEldecZ7U5jvjPjRtyIttIy4HGdwlcPPR"
 
 tournament_ID = 'sjq12ljh'
 
-url = main_api + 'tournaments/' + tournament_ID + '/participants.json'
+url = main_api + 'tournaments/' + tournament_ID + '/participants'
 payload = {'api_key': api_key}
 
-party_data = req.get(url, params=payload)
+party_data = req.get(url + '.json', params=payload)
 
 
 def strip_dict(unDict):
@@ -25,6 +25,16 @@ def getPartyID():
     return players
 
 
-print(getPartyID())
+def showPlayer(player_ID):
+    '''returns a dictionary for certain particiapnt with party_ID'''
+    player = req.get(url + '/' + str(player_ID) + '.json', params=payload)
+
+    return player.json()['participant']
+
+
+player_IDs = getPartyID()
+
+Fahad = showPlayer(player_IDs['Fahad'])
+print(Fahad)
 
 getPartyID()
