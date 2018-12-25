@@ -16,7 +16,7 @@ def strip_dict(unDict):
     return unDict[next(iter(unDict))]
 
 
-def getPartyID():
+def getPlayers_ID():
     players = {}
     for party in party_data.json():
         player = party['participant']
@@ -32,9 +32,9 @@ def showPlayer(player_ID):
     return player.json()['participant']
 
 
-player_IDs = getPartyID()
+player_IDs = getPlayers_ID()
 
 Fahad = showPlayer(player_IDs['Fahad'])
 print(Fahad)
 
-getPartyID()
+getPlayers_ID()
