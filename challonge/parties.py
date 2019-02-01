@@ -1,42 +1,37 @@
 import requests as req
 import json
 
+# Basic Data
 main_api = 'https://api.challonge.com/v1/'
 api_key = "DeSvEj7MEldecZ7U5jvjPjRtyIttIy4HGdwlcPPR"
-
 tournament_ID = 'sjq12ljh'
 
+# Preparing API Request
 url = main_api + 'tournaments/' + tournament_ID + '/participants'
 payload = {'api_key': api_key}
 
-party_data = req.get(url + '.json', params=payload)
-party_json = json.loads(party_data.text)
+# Requesting Data from API
+response = req.get(url + '.json', params=payload)
 
+# Obtaining JSON
+participants = json.loads(response.text)
 
-def strip_dict(unDict):
-    '''convert json to dict'''
-    return unDict[next(iter(unDict))]
+values2keep = ['id', 'name', 'seed', 'final_rank', 'group_player_ids']
 
+def pprint(parsed):
+    print(json.dumps(parsed, indent=2))
 
-def getPlayers_ID():
-    players = {}
-    for party in party_json:
-        player = party['participant']
-        players[player['name']] = player['id']
+def parsing_json(participants):
+    players = dict()
+
+    for participant in participants:
+        players [participant['participant']['name']] = {k:v for (k,v) in participant['participant'].items() if k in values2keep}
 
     return players
 
+    
 
-def showPlayer(player_ID):
-    '''returns a dictionary for certain particiapnt with party_ID'''
-    player = req.get(url + '/' + str(player_ID) + '.json', params=payload)
-    player_json = json.loads(player.text)
-    return player_json['participant']
+players = parsing_json(participants)
+for player in players:
+    print (f'{player} is ranked {players[player]["final_rank"]}')
 
-
-player_IDs = getPlayers_ID()
-
-Fahad = showPlayer(player_IDs['Fahad'])
-print(Fahad)
-
-getPlayers_ID()
