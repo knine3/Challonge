@@ -1,5 +1,6 @@
 import requests as req
 import json
+from helper import pprint, parsing_json
 
 # Basic Data
 main_api = 'https://api.challonge.com/v1/'
@@ -18,20 +19,9 @@ participants = json.loads(response.text)
 
 values2keep = ['id', 'name', 'seed', 'final_rank', 'group_player_ids']
 
-def pprint(parsed):
-    print(json.dumps(parsed, indent=2))
 
-def parsing_json(participants):
-    players = dict()
+players = parsing_json(participants, 'participant', 'name', values2keep)
 
-    for participant in participants:
-        players [participant['participant']['name']] = {k:v for (k,v) in participant['participant'].items() if k in values2keep}
-
-    return players
-
-    
-
-players = parsing_json(participants)
-for player in players:
-    print (f'{player} is ranked {players[player]["final_rank"]}')
-
+if __name__ == '__main__':
+    for player in players:
+        print(f'{player} is ranked {players[player]["final_rank"]}')
