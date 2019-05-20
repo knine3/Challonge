@@ -13,8 +13,8 @@ def json2dict(json_response, key_name, values2keep):
     participants is a list of multiple dicts
     Every dict consists of 1 key:value pair
     and we want to get the key name,
-	so we are converting the dict -> list
-	then accessing the list first element.
+    so we are converting the dict -> list
+    then accessing the list first element.
     '''
 
     parent = list(json_response[1])[0]
