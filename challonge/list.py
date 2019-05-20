@@ -1,5 +1,5 @@
 import requests as req
-from helper import pprint, parsing_json
+from helper import pprint, json2dict
 import json
 
 url = "https://api.challonge.com/v1/tournaments.json?state=ended"
@@ -16,8 +16,7 @@ tournaments = json.loads(resp.text)
 # pprint(tournaments)
 
 values2keep = ['id', 'name', 'completed_at', 'participants_count', 'game_name']
-
-tournaments_d = parsing_json(tournaments, 'name', values2keep)
+tournaments_d = json2dict(tournaments, 'name', values2keep)
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ def pprint(parsed):
     print(dumps(parsed, indent=2))
 
 
-def parsing_json(json_response, key_name, values2keep):
+def json2dict(json_response, key_name, values2keep):
 
     players = dict()
 

@@ -20,7 +20,7 @@ participants = json.loads(response.text)
 values2keep = ['id', 'name', 'seed', 'final_rank', 'group_player_ids']
 
 
-players = parsing_json(participants, 'name', values2keep)
+players = json2dict(participants, 'name', values2keep)
 
 if __name__ == '__main__':
     for player in players:
