@@ -1,27 +1,30 @@
 import requests as req
 import json
-from helper import pprint, parsing_json
+from helper import pprint, json2dict
 
 # Basic Data
-main_api = 'https://api.challonge.com/v1/'
-api_key = "DeSvEj7MEldecZ7U5jvjPjRtyIttIy4HGdwlcPPR"
+key = "DeSvEj7MEldecZ7U5jvjPjRtyIttIy4HGdwlcPPR"
 tournament_ID = '6276700'
 
-# Preparing API Request
-url = main_api + 'tournaments/' + tournament_ID + '/participants'
-payload = {'api_key': api_key}
 
-# Requesting Data from API
-response = req.get(url + '.json', params=payload)
+def parties(tournament_ID, key):
+    # Preparing API Request
+    url = 'https://api.challonge.com/v1/tournaments/' + tournament_ID + '/participants.json'
+    payload = {'api_key': key}
 
-# Obtaining JSON
-participants = json.loads(response.text)
+    # Requesting Data from API
+    response = req.get(url, params=payload)
 
-values2keep = ['id', 'name', 'seed', 'final_rank', 'group_player_ids']
+    # Obtaining JSON
+    participants = json.loads(response.text)
+    values2keep = ['id', 'name', 'seed', 'final_rank', 'group_player_ids']
 
+    players = json2dict(participants, 'name', values2keep)
 
-players = json2dict(participants, 'name', values2keep)
+    return players
+
 
 if __name__ == '__main__':
+    players = parties(tournament_ID, key)
     for player in players:
         print(f'{player} is ranked {players[player]["final_rank"]}')
