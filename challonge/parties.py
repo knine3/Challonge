@@ -1,9 +1,8 @@
 import requests as req
 import json
 from helper import pprint, json2dict
+from api import key
 
-# Basic Data
-key = "DeSvEj7MEldecZ7U5jvjPjRtyIttIy4HGdwlcPPR"
 tournament_ID = '6276700'
 
 

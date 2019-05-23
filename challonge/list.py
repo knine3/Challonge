@@ -1,12 +1,11 @@
 import requests as req
 from helper import pprint, json2dict
 from parties import parties
+from api import key
 import json
 import csv
 
 url = "https://api.challonge.com/v1/tournaments.json?state=ended"
-key = "DeSvEj7MEldecZ7U5jvjPjRtyIttIy4HGdwlcPPR"
-
 payload = {'api_key': key, 'state': 'ended'}
 
 resp = req.get(url, params=payload)

@@ -1,9 +1,9 @@
 import requests as r
 import json
 from helper import pprint
+from api import key
 
 # Pre-reqs
-key = 'DeSvEj7MEldecZ7U5jvjPjRtyIttIy4HGdwlcPPR'
 api = 'https://api.challonge.com/v1'
 tournament_id = '6286532'
 

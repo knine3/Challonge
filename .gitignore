@@ -2,4 +2,5 @@ prototype.py
 challonge/__pycache__/
 venv/
 challonge/tournaments.csv
+challonge/api.py
 
